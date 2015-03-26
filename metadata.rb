@@ -1,0 +1,18 @@
+name             'Calvin So'
+maintainer       'Calvin So'
+maintainer_email 'anonymous@anonymouse.com'
+description      'A Chef-Solo cookbook that bundles with Vagrant for provisioning all the basic software stack for a typical RoR developer.'
+long_description 'A Chef-Solo cookbook that bundles with Vagrant for provisioning all the basic software stack for a typical RoR developer.'
+version          '1.0'
+
+depends 'ntp'
+depends 'nginx'
+depends 'git'
+depends 'build-essential'
+depends 'vim'
+depends 'ruby_build'
+depends 'rbenv'
+depends 'imagemagick'
+depends 'redisio'
+depends 'java'
+
