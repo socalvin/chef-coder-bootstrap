@@ -1,8 +1,8 @@
-name             'Calvin So'
+name             'chef-instant-coder'
 maintainer       'Calvin So'
-maintainer_email 'anonymous@anonymouse.com'
-description      'A Chef-Solo cookbook that bundles with Vagrant for provisioning all the basic software stack for a typical RoR developer.'
-long_description 'A Chef-Solo cookbook that bundles with Vagrant for provisioning all the basic software stack for a typical RoR developer.'
+maintainer_email 'calvin.so@non-exist.com'
+description      'A Chef cookbook provisioning all the basic software stack for a typical RoR developer.'
+long_description 'A Chef cookbook provisioning all the basic software stack for a typical RoR developer.'
 version          '1.0'
 
 depends 'ntp'
@@ -15,4 +15,3 @@ depends 'rbenv'
 depends 'imagemagick'
 depends 'redisio'
 depends 'java'
-
