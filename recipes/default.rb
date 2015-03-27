@@ -19,49 +19,22 @@ projects_dir        = "#{home_dir}/projects"
 user                = "#{node[:coder][:user]}"
 mysql_root_password = "#{node[:mysql][:server_root_password]}"
 
-mysql_service 'default' do
-  port '3306'
-  version '5.6'
-  initial_root_password mysql_root_password
-  action [:create, :start]
-end
-
-mysql_config 'default' do
-  source 'mysite.cnf.erb'
-  notifies :restart, 'mysql_service[default]'
-  action :create
-end
-
-#
-# Install MySQL and its service
-#
-# execute "Install MySQL 5.6 #1" do
-# 	command "yum install -y http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm"
-# 	action :run   		
-#     not_if { File.exists? "/usr/bin/mysql" }	
-# end
-# execute "Install MySQL 5.6 #2" do
-# 	command "yum install -y mysql-community-server"
-# 	action :run
-#     not_if { File.exists? "/usr/bin/mysql" }		
-# end
-# execute "Start MySQL service" do
-# 	command "systemctl start mysqld"
-# 	action :run
-# end
-# execute "Set MySQL root password" do
-# 	command "mysqladmin -u root password '#{mysql_root_password}'"
-# 	action :run
-# 	ignore_failure true	
-# end
-
 #
 # Installl other packages
 #
-%w{libssl-dev libmysqlclient-dev}.each do |pkg|
+%w{libssl-dev libmysqlclient-dev mysql-server-5.6}.each do |pkg|
   package pkg do
     action :install
   end
+end
+
+#
+# Set MySQL password
+#
+execute "Set MySQL root password" do
+	command "mysqladmin -u root password '#{mysql_root_password}'"
+	action :run
+	ignore_failure true	
 end
 
 #
