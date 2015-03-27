@@ -19,6 +19,19 @@ projects_dir        = "#{home_dir}/projects"
 user                = "#{node[:coder][:user]}"
 mysql_root_password = "#{node[:mysql][:server_root_password]}"
 
+mysql_service 'default' do
+  port '3306'
+  version '5.6'
+  initial_root_password mysql_root_password
+  action [:create, :start]
+end
+
+mysql_config 'default' do
+  source 'mysite.cnf.erb'
+  notifies :restart, 'mysql_service[default]'
+  action :create
+end
+
 #
 # Install MySQL and its service
 #
