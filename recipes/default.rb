@@ -45,7 +45,7 @@ mysql_root_password = "#{node[:mysql][:server_root_password]}"
 #
 # Installl other packages
 #
-%w{libmysqlclient-dev}.each do |pkg|
+%w{libssl-dev libmysqlclient-dev}.each do |pkg|
   package pkg do
     action :install
   end
