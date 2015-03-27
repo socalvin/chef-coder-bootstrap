@@ -138,40 +138,27 @@ end
 include_recipe "ruby_build"
 include_recipe "rbenv::user_install"
 execute "Install Ruby" do                                             
-    command "su - #{user} -l -c 'rbenv install 2.1.5'" 	
+    command "su - #{user} -l -c 'rbenv install 2.2.1'" 	
     action :run   	
-    not_if { File.exists? "#{home_dir}/.rbenv/versions/2.1.5" }
+    not_if { File.exists? "#{home_dir}/.rbenv/versions/2.2.1" }
 end
 execute "Set rbenv global" do
-    command "su - #{user} -l -c 'rbenv global 2.1.5'" 	
+    command "su - #{user} -l -c 'rbenv global 2.2.1'" 	
     action :run   		
 end	
 execute "Install bundler" do
-    command "su - #{user} -l -c 'gem install bundler'" 	
+    command "su - #{user} -l -c 'gem install bundler rails --no-rdoc --no-ri'" 	
     action :run   		
 end
 
 #
 # Install Sublime Text
 #
-execute "Download Sublime Text" do
-	command "wget http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3065_x64.tar.bz2 && tar vxjf sublime_text_3_build_3065_x64.tar.bz2"
-	action :run   		
-	not_if { File.exists? "/opt/sublime_text_3" }
+execute "install-sublime-text" do
+  command "sudo add-apt-repository -y ppa:webupd8team/sublime-text-3; sudo apt-get update; sudo apt-get install -y sublime-text-installer"
 end
-execute "Install Sublime Text" do
-	command "mv sublime_text_3 /opt/ && ln -s /opt/sublime_text_3/sublime_text /usr/bin/sublime"
+execute "Create Sublime Text alias" do
+	command "ln -s /opt/sublime_text/sublime_text /usr/bin/sublime"
 	action :run
-	not_if { File.exists? "/opt/sublime_text_3" }	
+	not_if { File.exists? "/opt/sublime_text" }	
 end
-
-#
-# Install Chrome
-#
-# template "/etc/yum.repos.d/google-chrome.repo" do
-# 	source "repo/google-chrome.repo"
-# 	action :create
-# end
-# package 'google-chrome-stable' do
-# 	action :install
-# end
