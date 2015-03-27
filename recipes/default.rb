@@ -22,7 +22,7 @@ mysql_root_password = "#{node[:mysql][:server_root_password]}"
 #
 # Installl other packages
 #
-%w{libssl-dev libmysqlclient-dev mysql-server-5.6}.each do |pkg|
+%w{libssl-dev libmysqlclient-dev mysql-server-5.6 libreadline-dev}.each do |pkg|
   package pkg do
     action :install
   end
@@ -160,5 +160,5 @@ end
 execute "Create Sublime Text alias" do
 	command "ln -s /opt/sublime_text/sublime_text /usr/bin/sublime"
 	action :run
-	not_if { File.exists? "/opt/sublime_text" }	
+	not_if { File.exists? "/usr/bin/sublime" }	
 end
