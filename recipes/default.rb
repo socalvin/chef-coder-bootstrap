@@ -22,7 +22,7 @@ mysql_root_password = "#{node[:mysql][:server_root_password]}"
 #
 # Installl other packages
 #
-%w{libssl-dev libmysqlclient-dev mysql-server-5.6 libreadline-dev libsqlite3-dev libmagickwand-dev}.each do |pkg|
+%w{libssl-dev libmysqlclient-dev mysql-server-5.6 libreadline-dev libsqlite3-dev libmagickwand-dev p7zip-full}.each do |pkg|
   package pkg do
     action :install
   end
